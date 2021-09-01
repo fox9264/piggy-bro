@@ -24,7 +24,10 @@ import weibo from "./method/weibo"
 import weather from "./method/weather"
 import neteaseCloudMusic from "./method/netease-cloud-music"
 import wordPuzzle from "./method/word-puzzle";
-
+import groupForward from "./method/groupForward";
+import stockInterceptor from "./method/stock";
+mp.interceptor(stockInterceptor)
+mp.interceptor(groupForward)
 mp.interceptor(help)
 mp.interceptor(hello)
 mp.interceptor(idiom)
@@ -33,5 +36,4 @@ mp.interceptor(weibo)
 mp.interceptor(weather)
 mp.interceptor(neteaseCloudMusic)
 mp.interceptor(wordPuzzle)
-
 export {mp}
