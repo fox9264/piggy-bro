@@ -7,7 +7,7 @@ export default function randomJoke(): Promise<string> {
         const apiKey = getAPIKey("joke")
         axios({
             method: "GET",
-            url: "http://v.juhe.cn/joke/randJoke.php",
+            url: "http://v.juhe.cnw/joke/randJoke.php",
             params: {
                 key: apiKey
             }

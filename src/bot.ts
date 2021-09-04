@@ -25,6 +25,8 @@ export {template}
 
 // 给公共模板设置默认值
 import "./template"
+const args = require('minimist')(process.argv.slice(2))
+
 
 // 启动http服务器
 import server from "./server"
@@ -34,8 +36,10 @@ server()
 import {mp} from "./interceptor";
 
 const wechaty = Wechaty.instance({
-    name: "PiggyBro"
+    name: args['name'] //joe
 })
+console.log(process.argv)
+console.log(`Bot Name ${args['name']}`)
 wechaty.on("scan", (qrcode, status) => {
     switch (status) {
         case 2:

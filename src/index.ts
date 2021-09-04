@@ -5,7 +5,7 @@ import Path from "path"
 import "./better-console"
 
 function createBot() {
-    const botProcess = ChildProcess.fork(Path.join(__dirname, "./bot"))
+    const botProcess = ChildProcess.fork(Path.join(__dirname, "./bot"), process.argv)
     botProcess.on("exit", function (code: number) {
         console.log("机器人进程已退出，退出码：" + code)
         if (code !== 0) {

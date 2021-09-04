@@ -26,10 +26,12 @@ import neteaseCloudMusic from "./method/netease-cloud-music"
 import wordPuzzle from "./method/word-puzzle";
 import groupForward from "./method/groupForward";
 import stockInterceptor from "./method/stock";
+import newstockInterceptor from "./method/newstock";
 mp.interceptor(stockInterceptor)
+mp.interceptor(newstockInterceptor)
 mp.interceptor(groupForward)
 mp.interceptor(help)
-mp.interceptor(hello)
+//mp.interceptor(hello)
 mp.interceptor(idiom)
 mp.interceptor(joke)
 mp.interceptor(weibo)

@@ -1,0 +1,11 @@
+[
+  {"name":"三友化工","code":"600409","price":9.86, "first_date":"2021/06/22","end":false,"end_date":null},
+  {"name":"华阳股份","code":"600348","price":7.42, "first_date":"2021/06/30","end":true, "end_date": "2021/09/01"},
+  {"name":"陕鼓动力","code":"601369","price":8.74, "first_date":"2021/07/13","end":false,"end_date":null},
+  {"name":"中泰化学","code":"002092","price":11.48,"first_date":"2021/07/19","end":false,"end_date":null},
+  {"name":"青鸟消防","code":"002960","price":26.27,"first_date":"2021/07/26","end":false,"end_date":null},
+  {"name":"云南白药","code":"000538","price":99.98,"first_date":"2021/08/04","end":false,"end_date":null},
+  {"name":"楚江新材","code":"002171","price":10.08,"first_date":"2021/08/13","end":false,"end_date":null},
+  {"name":"盛屯矿业","code":"600711","price":8.99, "first_date":"2021/08/18","end":false,"end_date":null},
+  {"name":"林洋能源","code":"601222","price":10.33,"first_date":"2021/08/27","end":false,"end_date":null}
+]

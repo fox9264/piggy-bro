@@ -4,7 +4,8 @@
   "description": "An open-source wechaty based chatting bot",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node build/index.js",
+    "start-bot1": "tsc && node build/index.js --name=bot1",
+    "start-bot2": "tsc && node build/index.js --name=bot2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -14,13 +15,17 @@
   "author": "ReiKohaku",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.21.1",
-    "iconv-lite": "^0.4.24",
     "NeteaseCloudMusicApi": "^4.0.17",
+    "axios": "^0.21.1",
+    "fast-xml-parser": "^3.19.0",
+    "iconv-lite": "^0.4.24",
+    "istextorbinary": "^6.0.0",
     "node-emoji": "^1.10.0",
     "pinyin": "^2.10.2",
     "qrcode-terminal": "^0.12.0",
     "sqlite3": "^5.0.2",
+    "stock-api": "^2.0.5",
+    "unescape": "^1.0.1",
     "wechaty": "^0.62.3",
     "wechaty-puppet-wechat": "^0.28.1"
   },

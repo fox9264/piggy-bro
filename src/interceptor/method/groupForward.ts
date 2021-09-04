@@ -11,13 +11,14 @@ const groupForward = new Interceptor("groupForward")
         const content = message.text() // 消息内容
         const room = message.room() // 是否是群消息
         const type = await message.type()
-        let topic = await room.topic()
+        let topic = ''
+        if(room) {
+            topic = await room.topic()
+        }
+
         if (topic === '通知群') {
             forward_room = room
         }
-
-
-
         if (topic.indexOf('华证投顾') !== -1 || topic.indexOf('锦鲤策长期') !== -1) {
             let grp_name = topic.indexOf('华证投顾') !== -1 ? '1' : '2'
             if (forward_room !== null) {
