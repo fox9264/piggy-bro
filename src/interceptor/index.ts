@@ -1,6 +1,8 @@
 import {MessageProcessor} from "../lib/MessageProcessor";
 import {template} from "../bot";
 
+const args = require('minimist')(process.argv.slice(2))
+
 const mp = new MessageProcessor()
 mp.on("error", (message, error) => {
     if (error.message === "ERR_CANNOT_GET_KEY")
@@ -16,26 +18,33 @@ mp.on("error", (message, error) => {
     }
 })
 
-import help from "./method/help"
-import hello from "./method/hello"
-import idiom from "./method/idiom"
-import joke from "./method/joke"
-import weibo from "./method/weibo"
-import weather from "./method/weather"
-import neteaseCloudMusic from "./method/netease-cloud-music"
-import wordPuzzle from "./method/word-puzzle";
+// import help from "./method/help"
+// import hello from "./method/hello"
+// import idiom from "./method/idiom"
+// import joke from "./method/joke"
+// import weibo from "./method/weibo"
+// import weather from "./method/weather"
+// import neteaseCloudMusic from "./method/netease-cloud-music"
+// import wordPuzzle from "./method/word-puzzle";
+import topictureInterceptor from "./method/topic";
 import groupForward from "./method/groupForward";
 import stockInterceptor from "./method/stock";
 import newstockInterceptor from "./method/newstock";
+import xiaogroupForward from "./method/xiaogroupForward";
+if(args['name']==="bot2"){
+    mp.interceptor(groupForward)
+}
 mp.interceptor(stockInterceptor)
 mp.interceptor(newstockInterceptor)
-mp.interceptor(groupForward)
-mp.interceptor(help)
-//mp.interceptor(hello)
-mp.interceptor(idiom)
-mp.interceptor(joke)
-mp.interceptor(weibo)
-mp.interceptor(weather)
-mp.interceptor(neteaseCloudMusic)
-mp.interceptor(wordPuzzle)
+mp.interceptor(xiaogroupForward)
+mp.interceptor(topictureInterceptor)
+// mp.interceptor(help)
+// mp.interceptor(hello)
+// mp.interceptor(idiom)
+// mp.interceptor(joke)
+// mp.interceptor(weibo)
+// mp.interceptor(weather)
+// mp.interceptor(neteaseCloudMusic)
+// mp.interceptor(wordPuzzle)
+
 export {mp}

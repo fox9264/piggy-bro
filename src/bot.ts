@@ -1,6 +1,6 @@
 import "./better-console"
 
-import {Wechaty, Message, Contact} from "wechaty"
+import {Wechaty, Message, Room,Contact, Friendship} from "wechaty"
 import qrcodeTerminal from "qrcode-terminal";
 
 import path from "path"
@@ -36,7 +36,9 @@ server()
 import {mp} from "./interceptor";
 
 const wechaty = Wechaty.instance({
-    name: args['name'] //joe
+    name: args['name'] ,//joe,
+    puppet: 'wechaty-puppet-wechat',
+
 })
 console.log(process.argv)
 console.log(`Bot Name ${args['name']}`)
@@ -76,6 +78,53 @@ wechaty.on("message", async (message: Message) => {
     if (message.self()) return
     await mp.process(message)
 })
+
+
+wechaty.on('friendship', async (friendship) => {
+    if(args['name'] === 'bot1') {
+        let logMsg
+        try {
+            logMsg = '添加好友' + friendship.contact().name()
+            console.log(logMsg)
+
+            switch (friendship.type()) {
+                case Friendship.Type.Receive:
+                    let addFriendReg = eval('/镰刀/i')
+                    if (addFriendReg.test(friendship.hello())) {
+                        logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
+                        await friendship.accept()
+                        await new Promise(r => setTimeout(r, 1000))
+                        const contact = friendship.contact()
+                        await contact.say("你好呀")
+
+                    } else {
+                        logMsg = '没有通过验证 ' + friendship.hello()
+                    }
+                    break
+                case Friendship.Type.Confirm:
+                    logMsg = 'friend ship confirmed with ' + friendship.contact().name()
+
+                    break
+
+            }
+
+        } catch (e) {
+            logMsg = e.message
+        }
+        console.log(logMsg)
+    }
+})
+
+wechaty.on("room-join", async (room: Room, inviteeList: Contact[], inviter: Contact) => {
+    if(args['name'] === 'bot1') {
+        const nameList = inviteeList.map(c => c.name()).join(',')
+        await new Promise(r => setTimeout(r, 800))
+        if (await room.topic() == "镰刀") {
+            await room.say(`欢迎新成员@${nameList}进群，发送#股票收益查看股票池。温馨提示：股票池中股票皆为中线股，不建议追高，如果没有买入建议回调时购买。`)
+        }
+        console.log(`Room got new member ${nameList}, invited by ${inviter}`)
+    }
+});
 wechaty.on("error", async (error) => {
     console.error(template.use("on.error"))
     console.error(error)
@@ -83,6 +132,7 @@ wechaty.on("error", async (error) => {
 wechaty.start().then(() => {
     console.log(template.use("on.start"))
 })
+
 export {wechaty}
 
 const startAt = new Date()

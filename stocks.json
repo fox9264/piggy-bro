@@ -7,5 +7,7 @@
   {"name":"云南白药","code":"000538","price":99.98,"first_date":"2021/08/04","end":false,"end_date":null},
   {"name":"楚江新材","code":"002171","price":10.08,"first_date":"2021/08/13","end":false,"end_date":null},
   {"name":"盛屯矿业","code":"600711","price":8.99, "first_date":"2021/08/18","end":false,"end_date":null},
-  {"name":"林洋能源","code":"601222","price":10.33,"first_date":"2021/08/27","end":false,"end_date":null}
+  {"name":"林洋能源","code":"601222","price":10.33,"first_date":"2021/08/27","end":false,"end_date":null},
+  {"name":"国际医学","code":"000516","price":10.80,"first_date":"2021/09/07","end":false,"end_date":null},
+  {"name":"广誉远","code":"600771","price":32.50,"first_date":"2021/09/07","end":false,"end_date":null}
 ]

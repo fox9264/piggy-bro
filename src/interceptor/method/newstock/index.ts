@@ -5,12 +5,13 @@
 import {template} from "../../../bot";
 import Interceptor from "../../Interceptor";
 import Axios, {AxiosResponse} from "axios";
+import {FileBox} from "wechaty";
 template.add("newstock.success", "{content}")
 
-const newstockInterceptor = new Interceptor("今日新股")
-    .alias("新股")
+const newstockInterceptor = new Interceptor("#今日新股")
+    .alias("#新股")
     .check(message => {
-        if (/^今日新股/.test(message.text())) {
+        if (/^#今日新股/.test(message.text())) {
             return true
         }
     })

@@ -19,11 +19,12 @@ const groupForward = new Interceptor("groupForward")
         if (topic === '通知群') {
             forward_room = room
         }
-        if (topic.indexOf('华证投顾') !== -1 || topic.indexOf('锦鲤策长期') !== -1) {
+
+        if (topic.indexOf('华证投顾') !== -1 || topic.indexOf('锦鲤策长期') !== -1)  {
             let grp_name = topic.indexOf('华证投顾') !== -1 ? '1' : '2'
             if (forward_room !== null) {
                 if (type === 7) {
-                    await forward_room.say(`【${message.talker().name()}】说： ${content}  【来自${grp_name}群】`)
+                    await forward_room.say(`【${talker.name()}】说： ${content}  【来自${grp_name}群】`)
                 } else if (type === 1) {
                     let text = message.text()
                     let xml = decode(text)
@@ -31,19 +32,20 @@ const groupForward = new Interceptor("groupForward")
                     let url = jsonObj.msg.appmsg.url
                     let title = jsonObj.msg.appmsg.title
                     if (url) {
-                        await forward_room.say(`【${message.talker().name()}】说： ${title} | ${url} 【来自${grp_name}群】`)
+                        await forward_room.say(`【${talker.name()}】说： ${title} | ${url} 【来自${grp_name}群】`)
                     } else {
-                        await forward_room.say(`【${message.talker().name()}】说：  `)
+                        await forward_room.say(`【${talker.name()}】说：  `)
                         await message.forward(forward_room)
                     }
                 } else {
-                    await forward_room.say(`【${message.talker().name()}】说：  `)
+                    await forward_room.say(`【${talker.name()}】说：  `)
                     await message.forward(forward_room)
                 }
             }
+            if(room) {
+                return true
+            }
         }
-        if(room) {
-            return true
-        }
+
     })
 export default groupForward
