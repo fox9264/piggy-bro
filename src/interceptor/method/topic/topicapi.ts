@@ -1,4 +1,5 @@
 import {stocks} from "stock-api";
+
 const sharp = require('sharp');
 const textToSvg = require('text-to-svg');
 export default async function addText(basePicture, font, newFilePath, content) {
@@ -21,26 +22,27 @@ export default async function addText(basePicture, font, newFilePath, content) {
                 if (data[j].name == i.name) {
                     i.now = data[j].now
                     i.percent = ((data[j].now - i.price) / i.price * 100);
-                    if(i.percent<0){
+                    if (i.percent < 0) {
                         i.color_flag = 'green'
-                    }else{
-                        i.color_flag='red'
+                    } else {
+                        i.color_flag = 'red'
                     }
                 }
             }
         } else {
             i.now = data[0].now
             i.percent = ((data[0].now - i.price) / i.price * 100);
-            if(i.percent<0){
+            if (i.percent < 0) {
                 i.color_flag = 'green'
-            }else{
-                i.color_flag='red'
+            } else {
+                i.color_flag = 'red'
             }
 
         }
         top += 60
         let row_left = 285
-        let row = [i.name, i.code, i.now, i.price, i.first_date.substring(i.first_date.length - 5),i.percent.toFixed(2)+"%"]
+        let row = [i.name, i.code, i.now, i.price, i.first_date.substring(i.first_date.length - 5), i.percent.toFixed(2) + "%"]
+        let color = content[i].color ? content[i].color : 'black'
         for (let i = 0; i < row.length; i++) {
             if (i === 0) {
                 row_left = 285
@@ -55,9 +57,15 @@ export default async function addText(basePicture, font, newFilePath, content) {
             } else {
                 row_left = 988
             }
-
+            let opt = {
+                ...options,
+                attributes: {
+                    ...options.attributes,
+                    fill: color,
+                }
+            }
             texts.push({
-                input: Buffer.from(textToSvgSync.getSVG(row[i].toString(), options)),
+                input: Buffer.from(textToSvgSync.getSVG(row[i].toString(), opt)),
                 top,
                 left: row_left
             })
