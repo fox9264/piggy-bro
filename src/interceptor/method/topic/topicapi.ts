@@ -42,7 +42,7 @@ export default async function addText(basePicture, font, newFilePath, content) {
         top += 60
         let row_left = 285
         let row = [i.name, i.code, i.now, i.price, i.first_date.substring(i.first_date.length - 5), i.percent.toFixed(2) + "%"]
-        let color = content[i].color_flag ? content[i].color_flag : 'black'
+        let color = i.color_flag ? i.color_flag : 'black'
         for (let i = 0; i < row.length; i++) {
             if (i === 0) {
                 row_left = 285
