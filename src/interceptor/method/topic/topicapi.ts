@@ -40,36 +40,26 @@ export default async function addText(basePicture, font, newFilePath, content) {
 
         }
         top += 60
-        let row_left = 285
         let row = [i.name, i.code, i.now, i.price, i.first_date.substring(i.first_date.length - 5), i.percent.toFixed(2) + "%"]
         let color = i.color_flag ? i.color_flag : 'black'
-        for (let i = 0; i < row.length; i++) {
-            if (i === 0) {
-                row_left = 285
-            } else if (i === 1) {
-                row_left = 458
-            } else if (i === 2) {
-                row_left = 616
-            } else if (i === 3) {
-                row_left = 748
-            } else if (i === 4) {
-                row_left = 865
-            } else {
-                row_left = 988
+        let opt = {
+            ...options,
+            attributes: {
+                ...options.attributes,
+                fill: color,
             }
-            let opt = {
-                ...options,
-                attributes: {
-                    ...options.attributes,
-                    fill: color,
-                }
-            }
-            texts.push({
-                input: Buffer.from(textToSvgSync.getSVG(row[i].toString(), opt)),
-                top,
-                left: row_left
+        }
+        const writeLine = (row: string[]) => {
+            let offset = [285, 458, 616, 748, 865, 988];
+            row.forEach((column, index) => {
+                texts.push({
+                    input: Buffer.from(textToSvgSync.getSVG(column.toString(), opt)),
+                    top,
+                    left: offset[index]
+                })
             })
         }
+        writeLine(row);
     }
     await sharp(basePicture)
         .composite(texts)
