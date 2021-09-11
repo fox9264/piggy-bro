@@ -1,12 +1,12 @@
 {
-  "name": "piggy-bro",
+  "name": "King",
   "version": "1.0.0",
   "description": "An open-source wechaty based chatting bot",
   "main": "index.js",
   "scripts": {
-    "start-bot1": "tsc && node build/index.js --name=bot1 --func=da",
-    "start-bot1-debug": "tsc && node build/bot.js --name=bot1 --func=da",
-    "start-bot2": "tsc && node build/index.js --name=bot2 --func=xiao",
+    "start-bot1": "tsc && node build/index.js --name=bot1",
+    "start-bot1-debug": "tsc && node build/bot.js --name=bot1",
+    "start-bot2": "tsc && node build/index.js --name=bot2",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -28,6 +28,7 @@
     "sharp": "^0.29.1",
     "sqlite3": "^5.0.2",
     "stock-api": "^2.0.5",
+    "tencentcloud-sdk-nodejs": "^4.0.199",
     "text-to-svg": "^3.1.5",
     "unescape": "^1.0.1",
     "wechaty": "^0.62.3",

@@ -1,14 +1,12 @@
-import {template} from "../../bot";
+import {template, wechaty} from "../../bot";
 import Interceptor from "../Interceptor";
 import {Room} from "wechaty";
+import {Contact} from "wechaty";
 import parser from "fast-xml-parser"
 import decode from "unescape"
-import fs from "fs";
 let forward_room: Room = null
-import * as tencentcloud from "tencentcloud-sdk-nodejs"
-
-
-
+import fs from "fs"
+import * as tencentcloud from "tencentcloud-sdk-nodejs";
 function formatDate(){
     //三目运算符
     const Dates = new Date();
@@ -34,8 +32,7 @@ function formatDate(){
     //返回数据格式
     return Year + '-' + Months + '-' + Day + '-' + Hours + ':' + Minutes + ':' + Seconds;
 }
-
-const groupForward = new Interceptor("groupForward")
+const tgForward = new Interceptor("tgForward")
     .check(async message => {
         const talker = message.talker() // 发消息人
         const content = message.text() // 消息内容
@@ -46,15 +43,13 @@ const groupForward = new Interceptor("groupForward")
             topic = await room.topic()
         }
 
-        if (topic === '通知群') {
+        if (topic === '华证转发') {
             forward_room = room
         }
-
-        if (topic.indexOf('华证投顾') !== -1 || topic.indexOf('锦鲤策长期') !== -1 || topic.indexOf("涨停板") !== -1)  {
-            let grp_name = topic.indexOf('华证投顾') !== -1 ? '重点群' : '锦鲤策'
+        if (topic.indexOf('Super投顾交流群') !== -1) {
             if (forward_room !== null) {
                 if (type === 7) {
-                    await forward_room.say(`[${talker.name()}@${grp_name}]： ${content} `)
+                    await forward_room.say(`[${talker.name()}@Super投顾交流群]： ${content} `)
                 } else if (type === 1) {
                     let text = message.text()
                     let xml = decode(text)
@@ -62,17 +57,16 @@ const groupForward = new Interceptor("groupForward")
                     let url = jsonObj.msg.appmsg.url
                     let title = jsonObj.msg.appmsg.title
                     if (url) {
-                        await forward_room.say(`[${talker.name()}@${grp_name}]： ${title} | ${url} `)
+                        await forward_room.say(`[${talker.name()}@Super投顾交流群]： ${title} | ${url} `)
                     } else {
-                        await forward_room.say(`[${talker.name()}@${grp_name}]：  `)
+                        await forward_room.say(`[${talker.name()}]：`)
                         await message.forward(forward_room)
                     }
-                }else if(type ===2){
+                } else if(type ===2){
                     let now = formatDate()
                     const audioFileBox = await message.toFileBox();
                     const audioData: Buffer = await audioFileBox.toBuffer();
                     // audioData: silk 格式的语音文件二进制数据
-
                     const clientConfig = {
                         // 腾讯云认证信息
                         credential: {
@@ -114,8 +108,8 @@ const groupForward = new Interceptor("groupForward")
                         let recog = await client.DescribeTaskStatus({TaskId: resp.Data.TaskId})
                         if(recog.Data.StatusStr == "success") {
                             clearInterval(intervalId)
-                            await forward_room.say(`[${talker.name()}@${grp_name}]：[语音信息 ${now}]` + recog.Data.ResultDetail.map(x => x.FinalSentence).reduce((x, y) => x+y, ""))
-                            audioFileBox.name = `[${talker.name()}@${grp_name}]-${now}.mp3`
+                            await forward_room.say(`[${talker.name()}@Super投顾业务交流群]：[语音信息 ${now}]` + recog.Data.ResultDetail.map(x => x.FinalSentence).reduce((x, y) => x+y, ""))
+                            audioFileBox.name = `[${talker.name()}@Super投顾业务交流群]-${now}.mp3`
                             await forward_room.say(audioFileBox)
                         }
                         tryTime += 1
@@ -125,17 +119,17 @@ const groupForward = new Interceptor("groupForward")
                     }, 500)
 
                 }else if(type === 6){
-                    await forward_room.say(`[${talker.name()}@${grp_name}]：Image`)
+                    await forward_room.say(`[${talker.name()}@Super投顾交流群]：Image`)
                     await message.forward(forward_room)
-                } else {
-                    await forward_room.say(`[${talker.name()}@${grp_name}]：  `)
+            }else {
+                    await forward_room.say(`[${talker.name()}@Super投顾交流群]：`)
                     await message.forward(forward_room)
                 }
-            }
             if(room) {
                 return true
             }
         }
+        }
 
     })
-export default groupForward
+export default tgForward

@@ -91,7 +91,7 @@ wechaty.on('friendship', async (friendship) => {
                 case Friendship.Type.Receive:
                     let addFriendReg = eval('/镰刀/i')
                     if (addFriendReg.test(friendship.hello())) {
-                        logMsg = '自动添加好友，因为验证信息中带关键字‘每日说’'
+                        logMsg = '自动添加好友，因为验证信息中带关键字‘镰刀’'
                         await friendship.accept()
                         await new Promise(r => setTimeout(r, 1000))
                         const contact = friendship.contact()

@@ -4,6 +4,7 @@ import {Room} from "wechaty";
 import {Contact} from "wechaty";
 import parser from "fast-xml-parser"
 import decode from "unescape"
+import fs from "fs";
 let forward_room: Room = null
 
 const xiaogroupForward = new Interceptor("xiaogroupForward")
@@ -39,12 +40,15 @@ const xiaogroupForward = new Interceptor("xiaogroupForward")
                     await message.forward(forward_room)
                 }
             }
+            if(room) {
+                return true
+            }
         }
         if (topic.indexOf('融慧点金交流群') !== -1) {
-            let grp_name = "3"
+            let grp_name = "融慧点金"
             if (forward_room !== null) {
                 if (type === 7) {
-                    await forward_room.say(`【${talker.name()}】说： ${content}  【来自${grp_name}群】`)
+                    await forward_room.say(`[${talker.name()}@融汇点金]： ${content} `)
                 } else if (type === 1) {
                     let text = message.text()
                     let xml = decode(text)
@@ -52,13 +56,23 @@ const xiaogroupForward = new Interceptor("xiaogroupForward")
                     let url = jsonObj.msg.appmsg.url
                     let title = jsonObj.msg.appmsg.title
                     if (url) {
-                        await forward_room.say(`【${talker.name()}】说： ${title} | ${url} 【来自${grp_name}群】`)
+                        await forward_room.say(`[${talker.name()}@融慧点金]： ${title} | ${url} `)
                     } else {
-                        await forward_room.say(`【${talker.name()}】说：  `)
+                        await forward_room.say(`[${talker.name()}]：`)
                         await message.forward(forward_room)
                     }
-                } else {
-                    await forward_room.say(`【${talker.name()}】说：  `)
+                }else if(type ===2){
+                    const audioFileBox = await message.toFileBox();
+                    const audioData: Buffer = await audioFileBox.toBuffer();
+                    // audioData: silk 格式的语音文件二进制数据
+                    await forward_room.say(`[${talker.name()}@融汇点金]：`)
+                    await forward_room.say(audioFileBox)
+
+                }else if(type === 6){
+                    await forward_room.say(`[${talker.name()}@融汇点金]：Image`)
+                    await message.forward(forward_room)
+                }else {
+                    await forward_room.say(`[${talker.name()}@融汇点金]：`)
                     await message.forward(forward_room)
                 }
             }

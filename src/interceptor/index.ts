@@ -31,13 +31,20 @@ import groupForward from "./method/groupForward";
 import stockInterceptor from "./method/stock";
 import newstockInterceptor from "./method/newstock";
 import xiaogroupForward from "./method/xiaogroupForward";
-if(args['name']==="bot2"){
+import tgForward from "./method/tgForward";
+import sayback from "./method/sayBack"
+
+if(args['name']==="bot1"){
+    mp.interceptor(sayback)
+    mp.interceptor(topictureInterceptor)
+    mp.interceptor(stockInterceptor)
+    mp.interceptor(newstockInterceptor)
+    mp.interceptor(xiaogroupForward)
+}else{
     mp.interceptor(groupForward)
+    mp.interceptor(tgForward)
 }
-mp.interceptor(stockInterceptor)
-mp.interceptor(newstockInterceptor)
-mp.interceptor(xiaogroupForward)
-mp.interceptor(topictureInterceptor)
+
 // mp.interceptor(help)
 // mp.interceptor(hello)
 // mp.interceptor(idiom)

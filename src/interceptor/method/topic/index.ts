@@ -11,12 +11,7 @@ const topictureInterceptor = new Interceptor("#收益图")
         if (/^#收益图/.test(message.text())) {
             let stockpool = JSON.parse(fs.readFileSync('./stocks.json', 'utf-8'))
             let top_num = 1234
-            // let text_color='red'
-            // for(let i =0;i<stockpool.length;i++){
-            //     if(stockpool[i].percent<0){
-            //         text_color='green'
-            //     }
-            // }
+
             await addText(
                 basePicture,
                 {
@@ -24,7 +19,6 @@ const topictureInterceptor = new Interceptor("#收益图")
                     color: 'red',
                     left: 270,
                     top: top_num
-                    //1340-1250 = 90
                 },
                 './img/bg1.png',
                 stockpool

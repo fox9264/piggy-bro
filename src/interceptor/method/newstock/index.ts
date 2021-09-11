@@ -42,7 +42,7 @@ const newstockInterceptor = new Interceptor("#今日新股")
 
         })
         let content =''
-        content =`华融证券今日可转债/新股申购上市提示：${sg_content}申购，${ss_content}上市，华融证券祝您今日投资顺利！`
+        content =`华融证券今日可转债/新股申购上市提示：${sg_content}申购，${ss_content}上市，华融证券祝您投资顺利！`
 
         return template.use("newstock.success", {
             content: content
