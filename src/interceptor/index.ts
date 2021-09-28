@@ -41,8 +41,8 @@ if(args['name']==="bot1"){
     mp.interceptor(newstockInterceptor)
     mp.interceptor(xiaogroupForward)
 }else{
-    mp.interceptor(groupForward)
     mp.interceptor(tgForward)
+    mp.interceptor(groupForward)
 }
 
 // mp.interceptor(help)

@@ -76,8 +76,8 @@ const groupForward = new Interceptor("groupForward")
                     const clientConfig = {
                         // 腾讯云认证信息
                         credential: {
-                            secretId: "id",
-                            secretKey: "key",
+                            secretId: "xxx",
+                            secretKey: "xxx",
                         },
                         // 产品地域
                         region: "ap-beijing",

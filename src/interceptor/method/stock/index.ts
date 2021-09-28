@@ -21,7 +21,7 @@ const stockInterceptor = new Interceptor("#股票收益")
     .handler(async (message, checkerArgs: { arg: string | undefined }) => {
         let stockpool = JSON.parse(fs.readFileSync('./stocks.json', 'utf-8'))
         for (let i = 0; i < stockpool.length; ++i) {
-            const data = await stocks.sina.searchStocks(stockpool[i].code);
+            const data = await stocks.xueqiu.searchStocks(stockpool[i].code);
             if (data.length != 1) {
                 for (let j = 0; j < data.length; ++j) {
                     if (data[j].name == stockpool[i].name) {
@@ -38,7 +38,7 @@ const stockInterceptor = new Interceptor("#股票收益")
         let content = ''
         for (let i = 0; i < stockpool.length; i++) {
             let stock = stockpool[i];
-            content += `${stock.name}【${stock.code}】: 现价${stock.now},收益率${stock.percent ? stock.percent.toFixed(2) : ''}%, 推荐日期${stock.first_date}${stock.end ? ',止盈' : ''} <br/>`
+            content += `${stock.code}${stock.name}: 现价${stock.now},收益率${stock.percent ? stock.percent.toFixed(2) : ''}%, 关注日期${stock.first_date}${stock.end ? `,${stock.end_date}已止盈` : ''} <br/>`
         }
 
         return template.use("stock.success", {

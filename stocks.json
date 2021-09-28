@@ -9,5 +9,9 @@
   {"name":"盛屯矿业","code":"600711","price":8.99, "first_date":"2021/08/18","end":false,"end_date":null},
   {"name":"林洋能源","code":"601222","price":10.33,"first_date":"2021/08/27","end":false,"end_date":null},
   {"name":"国际医学","code":"000516","price":10.80,"first_date":"2021/09/07","end":false,"end_date":null},
-  {"name":"广誉远","code":"600771","price":32.50,"first_date":"2021/09/07","end":false,"end_date":null}
+  {"name":"广誉远","code":"600771","price":32.50,"first_date":"2021/09/07","end":false,"end_date":null},
+  {"name":"盛剑环境","code":"603324","price":63.57,"first_date":"2021/09/03","end":false,"end_date":null},
+  {"name":"光伏50ETF","code":"516880","price":1.440,"first_date":"2021/09/15","end":false,"end_date":null},
+  {"name":"光伏ETF","code":"515790","price":1.740,"first_date":"2021/09/15","end":false,"end_date":null}
+
 ]

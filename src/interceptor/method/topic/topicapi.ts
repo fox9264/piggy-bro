@@ -16,7 +16,7 @@ export default async function addText(basePicture, font, newFilePath, content) {
     let texts = []
     let top = 1130
     for (let i of content) {
-        const data = await stocks.sina.searchStocks(i.code);
+        const data = await stocks.xueqiu.searchStocks(i.code);
         if (data.length != 1) {
             for (let j = 0; j < data.length; ++j) {
                 if (data[j].name == i.name) {
